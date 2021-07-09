@@ -1,0 +1,27 @@
+$ratio: 375 / 10;
+// 定义一个 px2rem 方法在移动端显示：在 735 像素标准像素中的 xx px
+@function px2rem($px) {
+  @return $px / $ratio + rem;
+}
+
+@mixin center{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@mixin left {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+@mixin right {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+@mixin ellipsis {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
