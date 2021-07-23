@@ -17,6 +17,6 @@ module.exports = {
     'space-before-function-paren': 0,
     'quote-props': [0, 'always'],
     'semi': ["error", "always"],
-    'semi': 0
+    'semi': 0,
   }
 }

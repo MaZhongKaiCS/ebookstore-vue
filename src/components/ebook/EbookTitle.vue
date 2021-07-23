@@ -8,12 +8,12 @@
         <div class="icon-wrapper">
           <span class="icon-shelf"></span>
         </div>
-        <span class="icon-wrapper">
+        <div class="icon-wrapper">
           <span class="icon-cart"></span>
-        </span>
-        <span class="icon-wrapper">
+        </div>
+        <div class="icon-wrapper">
           <span class="icon-more"></span>
-        </span>
+        </div>
       </div>
     </div>
   </transition>
@@ -21,35 +21,35 @@
 
 <script>
   import { ebookMixin } from '../../utils/mixin'
-    export default {
-      name: 'EbookTitle',
-      mixins: [ebookMixin],
-      methods: {
-          back() {
-            console.log('back');
-          }
+
+  export default {
+    mixins: [ebookMixin],
+    methods: {
+      back() {
+        this.$router.go(-1)
       }
     }
+  }
 </script>
 
 <style lang="scss" rel="stylesheet/scss" scoped>
   @import "../../assets/styles/global";
-  .title-wrapper{
+
+  .title-wrapper {
     position: absolute;
     top: 0;
     left: 0;
-    z-index: 101;
+    z-index: 210;
     display: flex;
     width: 100%;
     height: px2rem(48);
     background: white;
-    box-shadow: 0 px2rem(8) px2rem(8) rgba(0,0,0, .15);
-    /*统一设置图标的大小  个别需要调整的自定义调整*/
+    box-shadow: 0 px2rem(8) px2rem(8) rgba(0, 0, 0, .15);
     font-size: px2rem(20);
-    .left{
+    .left {
       flex: 0 0 px2rem(60);
-      margin-left: px2rem(5);
       @include left;
+      margin-left: px2rem(15);
     }
     .right {
       flex: 1;

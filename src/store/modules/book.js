@@ -11,6 +11,7 @@
 *  4、在 mixin.js 中将 getters.js 和 actions.js 中注册过的数据和方法集中引入
 *  5、到需要引用数据的组件引用 mixin.js 文件，再使用组件的 mixins 方法引入mixin.js 中自定义的对象
 * */
+/* eslint-disable */
 const book = {
   state: {
     fileName: '',
@@ -34,61 +35,80 @@ const book = {
     isBookmark: null
   },
   mutations: {
-    'SET_FILENAME': (state, fileName) => {
+    'SET_FILENAME': (state,fileName) =>
+    {
       state.fileName = fileName
     },
-    'SET_MENU_VISIBLE': (state, visible) => {
+    'SET_MENU_VISIBLE': (state,visible) =>
+    {
       state.menuVisible = visible
     },
-    'SET_SETTING_VISIBLE': (state, visible) => {
+    'SET_SETTING_VISIBLE': (state,visible) =>
+    {
       state.settingVisible = visible
     },
-    'SET_DEFAULT_FONT_SIZE': (state, fontSize) => {
+    'SET_DEFAULT_FONT_SIZE': (state,fontSize) =>
+    {
       state.defaultFontSize = fontSize
     },
-    'SET_DEFAULT_FONT_FAMILY': (state, font) => {
+    'SET_DEFAULT_FONT_FAMILY': (state,font) =>
+    {
       state.defaultFontFamily = font
     },
-    'SET_FONT_FAMILY_VISIBLE': (state, fontFamilyVisible) => {
+    'SET_FONT_FAMILY_VISIBLE': (state,fontFamilyVisible) =>
+    {
       state.fontFamilyVisible = fontFamilyVisible
     },
-    'SET_DEFAULT_THEME': (state, theme) => {
+    'SET_DEFAULT_THEME': (state,theme) =>
+    {
       state.defaultTheme = theme
     },
-    'SET_BOOK_AVAILABLE': (state, bookAvailable) => {
+    'SET_BOOK_AVAILABLE': (state,bookAvailable) =>
+    {
       state.bookAvailable = bookAvailable
     },
-    'SET_PROGRESS': (state, progress) => {
+    'SET_PROGRESS': (state,progress) =>
+    {
       state.progress = progress
     },
-    'SET_SECTION': (state, section) => {
+    'SET_SECTION': (state,section) =>
+    {
       state.section = section
     },
-    'SET_IS_PAGINATING': (state, isPaginating) => {
+    'SET_IS_PAGINATING': (state,isPaginating) =>
+    {
       state.isPaginating = isPaginating
     },
-    'SET_CURRENT_BOOK': (state, currentBook) => {
+    'SET_CURRENT_BOOK': (state,currentBook) =>
+    {
       state.currentBook = currentBook
     },
-    'SET_NAVIGATION': (state, navigation) => {
+    'SET_NAVIGATION': (state,navigation) =>
+    {
       state.navigation = navigation
     },
-    'SET_COVER': (state, cover) => {
+    'SET_COVER': (state,cover) =>
+    {
       state.cover = cover
     },
-    'SET_METADATA': (state, metadata) => {
+    'SET_METADATA': (state,metadata) =>
+    {
       state.metadata = metadata
     },
-    'SET_PAGINATE': (state, paginate) => {
+    'SET_PAGINATE': (state,paginate) =>
+    {
       state.paginate = paginate
     },
-    'SET_PAGELIST': (state, pagelist) => {
+    'SET_PAGELIST': (state,pagelist) =>
+    {
       state.pagelist = pagelist
     },
-    'SET_OFFSETY': (state, offsetY) => {
+    'SET_OFFSETY': (state,offsetY) =>
+    {
       state.offsetY = offsetY
     },
-    'SET_IS_BOOKMARK': (state, isBookmark) => {
+    'SET_IS_BOOKMARK': (state,isBookmark) =>
+    {
       state.isBookmark = isBookmark
     }
   }

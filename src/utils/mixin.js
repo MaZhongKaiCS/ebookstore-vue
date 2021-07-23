@@ -1,6 +1,6 @@
-import { mapGetters, mapActions } from 'vuex';
-import { themeList, addCss, removeAllCss } from './book';
-import { saveLocation } from './localStorage';
+import { mapGetters, mapActions } from 'vuex'
+import { themeList, addCss, removeAllCss, getReadTimeByMinute } from './book'
+import { getBookmark, saveLocation } from './localStorage'
 
 export const ebookMixin = {
   computed: {
@@ -27,6 +27,9 @@ export const ebookMixin = {
     ]),
     themeList() {
       return themeList(this)
+    },
+    getSectionName() {
+      return this.section ? this.navigation[this.section].label : ''
     }
   },
   methods: {
@@ -51,7 +54,6 @@ export const ebookMixin = {
       'setOffsetY',
       'setIsBookmark'
     ]),
-    // 设置全局样式，引入book.js中的 addCss 方法
     initGlobalStyle() {
       removeAllCss()
       switch (this.defaultTheme) {
@@ -67,29 +69,62 @@ export const ebookMixin = {
         case 'Night':
           addCss(`${process.env.VUE_APP_RES_URL}/theme/theme_night.css`)
           break
+        default:
+          addCss(`${process.env.VUE_APP_RES_URL}/theme/theme_default.css`)
+          break
       }
     },
-    // 用于刷新当前位置(由于在 EbookSettingProgress 和 EbookReader 中都需要使用，故将其放入 mixin)
     refreshLocation() {
       const currentLocation = this.currentBook.rendition.currentLocation()
-      const startCfi = currentLocation.start.cfi
-      const progress = this.currentBook.locations.percentageFromCfi(startCfi)
-      this.setProgress(Math.floor(progress * 100))
-      this.setSection(currentLocation.start.index)
-      saveLocation(this.fileName, startCfi)
+      if (currentLocation && currentLocation.start) {
+        const startCfi = currentLocation.start.cfi
+        const progress = this.currentBook.locations.percentageFromCfi(startCfi)
+        this.setProgress(Math.floor(progress * 100))
+        this.setSection(currentLocation.start.index)
+        saveLocation(this.fileName, startCfi)
+        const bookmark = getBookmark(this.fileName)
+        if (bookmark) {
+          if (bookmark.some(item => item.cfi === startCfi)) {
+            this.setIsBookmark(true)
+          } else {
+            this.setIsBookmark(false)
+          }
+        } else {
+          this.setIsBookmark(false)
+        }
+        if (this.pagelist) {
+          const totalPage = this.pagelist.length
+          const currentPage = currentLocation.start.location
+          if (currentPage && currentPage > 0) {
+            this.setPaginate(currentPage + ' / ' + totalPage)
+          } else {
+            this.setPaginate('')
+          }
+        } else {
+          this.setPaginate('')
+        }
+      }
     },
-    display(target, callback) {
+    display(target, cb) {
       if (target) {
         this.currentBook.rendition.display(target).then(() => {
           this.refreshLocation()
-          if (callback) callback()
+          if (cb) cb()
         })
       } else {
         this.currentBook.rendition.display().then(() => {
           this.refreshLocation()
-          if (callback) callback()
+          if (cb) cb()
         })
       }
+    },
+    hideTitleAndMenu() {
+      this.setMenuVisible(false)
+      this.setSettingVisible(-1)
+      this.setFontFamilyVisible(false)
+    },
+    getReadTimeText() {
+      return this.$t('book.haveRead').replace('$1', getReadTimeByMinute(this.fileName))
     }
   }
 }

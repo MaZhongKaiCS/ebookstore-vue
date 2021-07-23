@@ -15,7 +15,7 @@
   import EbookTitle from '../../components/ebook/EbookTitle'
   import EbookMenu from '../../components/ebook/EbookMenu';
   import { getReadTime, saveReadTime } from '../../utils/localStorage';
-    export default {
+  export default {
       components: {
         // 组件的引用：2、在 components 中局部注册
         EbookReader,
