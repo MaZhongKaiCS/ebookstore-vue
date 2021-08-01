@@ -28,6 +28,7 @@
     import EbookSettingFontPopup from './EbookSettingFontPopup';
     import EbookSettingTheme from './EbookSettingTheme';
     import EbookSettingProgress from './EbookSettingProgress';
+    import EbookSlide from './EbookSlide.vue'
     import { ebookMixin } from '../../utils/mixin'
     export default {
       name: 'EbookMenu',
@@ -35,7 +36,8 @@
         EbookSettingFont,
         EbookSettingFontPopup,
         EbookSettingTheme,
-        EbookSettingProgress
+        EbookSettingProgress,
+        EbookSlide
       },
       mixins: [ebookMixin],
       methods: {

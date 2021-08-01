@@ -13,7 +13,6 @@
 </template>
 
 <script>
-  import { px2rem } from '../../utils/utils'
 
   export default {
     data() {
@@ -37,69 +36,30 @@
           { value: 16 },
           { value: 16 },
           { value: 16 }
-        ],
-        add: true,
-        end: false
+        ]
       }
-    },
-    mounted() {
-      this.task = setInterval(() => {
-        this.$refs.mask.forEach((item, index) => {
-          const mask = this.$refs.mask[index]
-          const line = this.$refs.line[index]
-          let maskWidth = this.maskWidth[index]
-          let lineWidth = this.lineWidth[index]
-          if (index === 0) {
-            if (this.add && maskWidth.value < 16) {
-              maskWidth.value++
-              lineWidth.value--
-            } else if (!this.add && lineWidth.value < 16) {
-              maskWidth.value--
-              lineWidth.value++
-            }
-          } else {
-            if (this.add && maskWidth.value < 16) {
-              let preMaskWidth = this.maskWidth[index - 1]
-              if (preMaskWidth.value >= 8) {
-                maskWidth.value++
-                lineWidth.value--
-              }
-            } else if (!this.add && lineWidth.value < 16) {
-              let preLineWidth = this.lineWidth[index - 1]
-              if (preLineWidth.value >= 8) {
-                maskWidth.value--
-                lineWidth.value++
-              }
-            }
-          }
-          mask.style.width = `${px2rem(maskWidth.value)}rem`
-          mask.style.flex = `0 0 ${px2rem(maskWidth.value)}rem`
-          line.style.width = `${px2rem(lineWidth.value)}rem`
-          line.style.flex = `0 0 ${px2rem(lineWidth.value)}rem`
-          if (index === this.maskWidth.length - 1) {
-            if (this.add) {
-              if (maskWidth.value === 16) {
-                this.end = true
-              }
-            } else {
-              if (maskWidth.value === 0) {
-                this.end = true
-              }
-            }
-          }
-          if (this.end) {
-            this.add = !this.add
-            this.end = false
-          }
-        })
-      }, 20)
     }
   }
 </script>
 
 <style lang="scss" rel="stylesheet/scss" scoped>
   @import "../../assets/styles/global";
-
+  @keyframes line{
+    0%, 33%{
+      flex: 0 0 0;
+    }
+    66%, 100%{
+      flex: 1;
+    }
+  }
+  @keyframes mask{
+    0%, 33%{
+      flex: 1;
+    }
+    66%, 100%{
+      flex: 0 0 0;
+    }
+  }
   .ebook-loading {
     position: relative;
     z-index: 400;
@@ -109,29 +69,65 @@
     border: px2rem(1.5) solid #d7d7d7;
     border-radius: px2rem(3);
     .ebook-loading-wrapper {
-      display: flex;
       width: 100%;
       height: 100%;
+      @include center;
       .ebook-loading-item {
         display: flex;
         flex-direction: column;
         flex: 1;
-        padding: px2rem(7) 0;
-        box-sizing: border-box;
+        justify-content: space-around;
+        &:nth-child(1){
+          .ebook-loading-line-wrapper{
+            &:nth-child(1){
+              .ebook-loading-mask, .ebook-loading-line{
+                animation-delay: -.5s;
+              }
+            }
+            &:nth-child(2){
+              .ebook-loading-mask, .ebook-loading-line{
+                animation-delay: -.25s;
+              }
+            }
+            &:nth-child(3){
+              .ebook-loading-mask, .ebook-loading-line{
+                animation-delay: -.1s;
+              }
+            }
+          }
+        }
+        &:nth-child(2){
+          .ebook-loading-line-wrapper{
+            &:nth-child(1){
+              .ebook-loading-mask, .ebook-loading-line{
+                animation-delay: .1s;
+              }
+            }
+            &:nth-child(2){
+              .ebook-loading-mask, .ebook-loading-line{
+                animation-delay: .2s;
+              }
+            }
+            &:nth-child(3){
+              .ebook-loading-mask, .ebook-loading-line{
+                animation-delay: .4s;
+              }
+            }
+          }
+        }
         .ebook-loading-line-wrapper {
           flex: 1;
+          display: flex;
+          align-items: center;
           padding: 0 px2rem(7);
           box-sizing: border-box;
-          @include left;
           .ebook-loading-line {
-            flex: 0 0 px2rem(16);
-            width: px2rem(16);
+            animation: line 1s linear infinite;
             height: px2rem(2);
             background: #d7d7d7;
           }
           .ebook-loading-mask {
-            flex: 0 0 0;
-            width: 0;
+           animation: mask 1s linear infinite;
             height: px2rem(2);
           }
         }
@@ -143,6 +139,7 @@
         width: px2rem(1.5);
         height: 100%;
         background: #d7d7d7;
+        transform: (0 -50%);
       }
     }
   }

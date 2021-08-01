@@ -163,9 +163,9 @@ export default {
         } else {
           this.toggleTitleAndMenu();
         }
-        // 禁止事件的默认方法调用和传播
+        // // 禁止事件的默认方法调用和传播
         if (event.preventDefault) {
-          // event.preventDefault();
+          event.preventDefault();
         }
         event.stopPropagation();
       });
