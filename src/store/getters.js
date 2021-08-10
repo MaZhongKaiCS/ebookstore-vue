@@ -1,4 +1,4 @@
-// 在 getters 中定义的属性，方便后续在组件中直接使用 this.xxx 来获取，不需要 this.$store.state.book.xxx 来获取
+// 在 getters 中定义的属性，方便后续在组件中直接配合 mapGetters使用 this.xxx 来获取，不需要 this.$store.state.book.xxx 来获取
 const book = {
   fileName: state => state.book.fileName,
   menuVisible: state => state.book.menuVisible,
