@@ -6,7 +6,7 @@
 -  Vuex
 -  Epub.js
 -  Sass
-- Nginx
+-  Nginx
 
 ### 项目描述
 
