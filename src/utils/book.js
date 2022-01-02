@@ -19,8 +19,7 @@ export const FONT_FAMILY = [
   { font: 'Tangerine' }
 ]
 
-export function themeList(vue)
-{
+export function themeList(vue) {
   return [
     {
       alias: vue.$t('book.themeDefault'),
@@ -73,17 +72,15 @@ export function themeList(vue)
   ]
 }
 
-export function addCss(href)
-{
+export function addCss(href) {
   const link = document.createElement('link')
-  link.setAttribute('rel','stylesheet')
-  link.setAttribute('type','text/css')
-  link.setAttribute('href',href)
+  link.setAttribute('rel', 'stylesheet')
+  link.setAttribute('type', 'text/css')
+  link.setAttribute('href', href)
   document.getElementsByTagName('head')[0].appendChild(link)
 }
 
-export function removeCss(href)
-{
+export function removeCss(href) {
   const links = document.getElementsByTagName('link')
   for (let i = links.length; i >= 0; i--) {
     const link = links[i]
@@ -93,16 +90,14 @@ export function removeCss(href)
   }
 }
 
-export function removeAllCss()
-{
+export function removeAllCss() {
   removeCss(`${process.env.VUE_APP_RES_URL}/theme/theme_default.css`)
   removeCss(`${process.env.VUE_APP_RES_URL}/theme/theme_eye.css`)
   removeCss(`${process.env.VUE_APP_RES_URL}/theme/theme_gold.css`)
   removeCss(`${process.env.VUE_APP_RES_URL}/theme/theme_night.css`)
 }
 
-export function getReadTimeByMinute(fileName)
-{
+export function getReadTimeByMinute(fileName) {
   const readTime = getReadTime(fileName)
   if (!readTime) {
     return 0
@@ -111,7 +106,6 @@ export function getReadTimeByMinute(fileName)
   }
 }
 
-export function flatten(array)
-{
-  return [].concat(...array.map(item => [].concat(item,...flatten(item.subitems))))
+export function flatten(array) {
+  return [].concat(...array.map(item => [].concat(item, ...flatten(item.subitems))))
 }
